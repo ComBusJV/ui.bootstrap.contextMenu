@@ -586,7 +586,7 @@
               _clickedElement = event.currentTarget;
               angular.element(_clickedElement).addClass('context');
 
-              $scope.$apply(function () {
+              $scope.$applyAsync(function () {
                 var options = $scope.$eval(attrs.contextMenu);
                 var customClass = attrs.contextMenuClass;
                 var modelValue = $scope.$eval(attrs.model);
