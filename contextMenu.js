@@ -1,4 +1,4 @@
-(function($, angular) {
+(function(angular) {
 
   // eslint-disable-next-line angular/file-name, angular/no-service-method
   angular.module('ui.bootstrap.contextMenu', [])
@@ -55,7 +55,7 @@
             }
           } else {
 
-            var $a = $('<a>');
+            var $a = angular.element('<a>');
             var $anchorStyle = {};
 
             if (leftOriented) {
@@ -97,7 +97,7 @@
                   $boldStyle.float = 'right';
                 }
 
-                var $bold = $('<strong style="font-family:monospace;font-weight:bold;float:right;">' + $arrow + '</strong>');
+                var $bold = angular.element('<strong style="font-family:monospace;font-weight:bold;float:right;">' + $arrow + '</strong>');
                 $bold.css($boldStyle);
                 $a.css('cursor', 'default');
                 $a.append($bold);
@@ -211,7 +211,7 @@
                 $scope.$apply(function () {
 
                   var cleanupFunction = function () {
-                    $(event.currentTarget).removeClass('context');
+                    angular.element(event.currentTarget).removeClass('context');
                     removeAllContextMenus();
                   };
                   var clickFunction = angular.isFunction(item.click)
@@ -325,7 +325,7 @@
 
               // Only add the <li> if the item is displayed
               if (displayed) {
-                var $li = $('<li>');
+                var $li = angular.element('<li>');
                 var itemParams = angular.extend({}, params);
                 itemParams.item = item;
                 itemParams.$li = $li;
@@ -451,7 +451,7 @@
           // Destructuring
           var customClass = params.customClass;
 
-          var $ul = $('<ul>');
+          var $ul = angular.element('<ul>');
           $ul.addClass('dropdown-menu');
           $ul.attr({ 'role': 'menu' });
           $ul.css({
@@ -493,7 +493,7 @@
 
         function removeOnOutsideClickEvent(e) {
 
-          var $curr = $(e.target);
+          var $curr = angular.element(e.target);
           var shouldRemove = true;
 
           while($curr.length) {
@@ -512,7 +512,7 @@
         function removeAllContextMenus(e) {
           $document.find('body').off('mousedown', removeOnOutsideClickEvent);
           $document.off('scroll', removeOnScrollEvent);
-          $(_clickedElement).removeClass('context');
+          angular.element(_clickedElement).removeClass('context');
           removeContextMenus();
           $rootScope.$broadcast('');
         }
@@ -584,7 +584,7 @@
               $document.on('scroll', removeOnScrollEvent);
 
               _clickedElement = event.currentTarget;
-              $(_clickedElement).addClass('context');
+              angular.element(_clickedElement).addClass('context');
 
               $scope.$apply(function () {
                 var options = $scope.$eval(attrs.contextMenu);
@@ -620,4 +620,4 @@
         };
       }]);
 // eslint-disable-next-line angular/window-service
-})(window.angular.element, window.angular);
+})(window.angular);
